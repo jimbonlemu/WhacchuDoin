@@ -1,7 +1,7 @@
-package com.jimbonlemu.whacchudoin.data.network.repository
+package com.jimbonlemu.whacchudoin.data.network.services
 
-import com.jimbonlemu.whacchudoin.data.network.auth.LoginResponse
-import com.jimbonlemu.whacchudoin.data.network.auth.RegisterResponse
+import com.jimbonlemu.whacchudoin.data.network.dto.LoginResponse
+import com.jimbonlemu.whacchudoin.data.network.dto.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

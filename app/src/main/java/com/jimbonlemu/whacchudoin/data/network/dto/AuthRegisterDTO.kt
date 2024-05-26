@@ -1,4 +1,4 @@
-package com.jimbonlemu.whacchudoin.data.network.auth
+package com.jimbonlemu.whacchudoin.data.network.dto
 
 import com.jimbonlemu.whacchudoin.data.network.response.ApiResponse
 

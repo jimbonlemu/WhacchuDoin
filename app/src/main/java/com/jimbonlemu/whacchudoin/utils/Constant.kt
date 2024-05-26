@@ -1,6 +1,7 @@
 package com.jimbonlemu.whacchudoin.utils
 
 import com.jimbonlemu.whacchudoin.di.feature.authModule
+import com.jimbonlemu.whacchudoin.di.feature.storyModule
 import com.jimbonlemu.whacchudoin.di.modules.networkModule
 import com.jimbonlemu.whacchudoin.di.modules.preferenceModule
 import com.jimbonlemu.whacchudoin.di.modules.viewModelModule
@@ -14,5 +15,8 @@ val koinModules = listOf(
     networkModule,
     preferenceModule,
     viewModelModule,
-    authModule
+    authModule,
+    storyModule,
 )
+
+const val MAX_FILE_SIZE = 1000000

@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
+    alias(libs.plugins.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -42,6 +45,9 @@ android {
 
 dependencies {
 
+//    implementation(libs.androidx.swiperefreshlayout)
+
+    implementation(libs.androidx.swiperefreshlayout)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
@@ -80,11 +86,8 @@ dependencies {
     // UCrop
     implementation(libs.ucrop)
 
-    // Coil
+    // Glide
     implementation (libs.glide)
-
-    // Fancy Toast
-    implementation(libs.fancyToast)
 
     // Google Service
     implementation(libs.play.services.maps)

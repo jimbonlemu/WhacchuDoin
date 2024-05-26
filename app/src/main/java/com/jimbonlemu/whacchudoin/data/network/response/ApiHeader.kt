@@ -26,14 +26,13 @@ class ApiHeader(
     }
 
     private fun mapHeaders(chain: Interceptor.Chain): Request {
-        val original = chain.request()
 
-        val requestBuilder = original.newBuilder()
+        val chainingBuilder = chain.request().newBuilder()
 
         for ((key, value) in requestHeaders) {
-            requestBuilder.addHeader(key, value)
+            chainingBuilder.addHeader(key, value)
         }
-        return requestBuilder.build()
+        return chainingBuilder.build()
     }
 
 }

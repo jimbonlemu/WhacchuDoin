@@ -15,5 +15,45 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="iv_item_photo_desc">Image description of the story that are posted</string>
+    <string name="tv_item_name_dec">Name of user that are posted the story</string>
+    <string name="add_new_story">Add New Story</string>
+    <string name="logout">Logout</string>
+    <string name="image_desc_add">Image preview before the story are posted</string>
+    <string name="camera">Camera</string>
+    <string name="ed_hint">Write your activity desc</string>
+    <string name="btn_add_text">Post your Story</string>
+    <string name="add_story_title">Add Story</string>
+    <string name="gallery">Gallery</string>
+    <string name="loading_upload_story">Process uploading story</string>
+    <string name="success_post_story">Success Posted your story</string>
+    <string name="access_permission">Permission to use Location Access is Denied \n Please enable to do this action</string>
+    <string name="detail_story">Detail Story</string>
+    <string name="loading">Loading....</string>
+    <string name="success_login">Success Login</string>
+    <string name="login">Login</string>
+    <string name="confirmation">Confirmation!</string>
+    <string name="log_out_confirm">Are you sure to Log out ?</string>
+    <string name="yes_answer">Yes, I\'m sure</string>
+    <string name="no_answer">Not now</string>
+    <string name="type_email">Type your Email</string>
+    <string name="type_password">Type your password</string>
+    <string name="type_password_confirm">Type your password confirmation</string>
+    <string name="application_logo">Application logo</string>
+    <string name="register">Register</string>
+    <string name="type_name">Type your name</string>
+    <string name="email_empty_error">Email field not allowed to left empty</string>
+    <string name="password_empty_error">Password field not allowed to left empty</string>
+    <string name="name_empty_error">Name Field not allowed to left empty</string>
+    <string name="password_confirm_empty_error">Password confirmation field not allowed to left empty</string>
+    <string name="password_field_and_confirmation_error">Make sure you typed your password and confirmation in same value</string>
+    <string name="success_register">Success to register account now try login into your account</string>
+    <string name="don_t_have_an_account">Don\'t have an account \n click me</string>
+    <string name="already_have_an_account">Already have an account ? \n click me to login</string>
+    <string name="post_story_option">Post Story Option!</string>
+    <string name="post_with_your_current_location">Post With your current Location ?</string>
+    <string name="yes_post_with_current_location">"Yes, Post with current location "</string>
+    <string name="no_don_t_post_with_location">No, Don\'t post with location</string>
+    <string name="don_t_left_the_image_and_description_empty">Don\'t left the Image and description empty</string>
 </resources>

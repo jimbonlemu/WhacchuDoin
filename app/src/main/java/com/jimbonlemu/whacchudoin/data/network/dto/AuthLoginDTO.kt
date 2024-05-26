@@ -1,8 +1,7 @@
-package com.jimbonlemu.whacchudoin.data.network.auth
+package com.jimbonlemu.whacchudoin.data.network.dto
 
 import com.google.gson.annotations.SerializedName
 import com.jimbonlemu.whacchudoin.data.network.response.ApiResponse
-
 
 data class LoginRequest(
     val email: String,

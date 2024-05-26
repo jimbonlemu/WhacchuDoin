@@ -1,24 +1,28 @@
 package com.jimbonlemu.whacchudoin.views
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isGone
+import com.jimbonlemu.whacchudoin.R
 import com.jimbonlemu.whacchudoin.core.CoreActivity
 import com.jimbonlemu.whacchudoin.data.network.response.ResponseState
 import com.jimbonlemu.whacchudoin.databinding.ActivityLoginBinding
-import com.jimbonlemu.whacchudoin.view_models.LoginViewModel
+import com.jimbonlemu.whacchudoin.view_models.AuthViewModel
 import org.koin.android.ext.android.inject
 
 class LoginActivity : CoreActivity<ActivityLoginBinding>() {
 
-    private val loginViewModel: LoginViewModel by inject()
+    private val authViewModel: AuthViewModel by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        animationPlay()
         initAction()
         initObservers()
-
     }
 
     override fun setupBinding(layoutInflater: LayoutInflater): ActivityLoginBinding =
@@ -27,52 +31,86 @@ class LoginActivity : CoreActivity<ActivityLoginBinding>() {
 
     private fun initAction() {
         binding.apply {
-            loginButton.setOnClickListener {
+            btnLogin.setOnClickListener {
                 val email = edLoginEmail.text?.trim().toString()
                 val password = edLoginPassword.text?.trim().toString()
 
                 if (email.isEmpty()) {
-                    edLoginEmail.error = "Email field not allowed to left empty"
+                    edLoginEmail.error = getString(R.string.email_empty_error)
                 }
                 if (password.isEmpty()) {
-                    edLoginPassword.error = "Password field not allowed to left empty"
+                    edLoginPassword.error = getString(R.string.password_empty_error)
                 }
                 if (email.isNotEmpty() && password.isNotEmpty()) {
-                    loginViewModel.login(email, password)
+                    authViewModel.login(email, password)
                 }
-
             }
-
-//            registerButton.setOnClickListener {
-//                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-//            }
+            btnRegister.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            }
         }
     }
 
-
-
     private fun initObservers() {
         binding.apply {
-            loginViewModel.loginResult.observe(this@LoginActivity) { result ->
+            authViewModel.loginResult.observe(this@LoginActivity) { result ->
                 when (result) {
                     is ResponseState.Loading -> {
-                        loginButton.text = "Loading...."
-                        loginButton.isEnabled = false
+                        btnLogin.text = getString(R.string.loading)
+                        isFormFieldEnabled(false)
                     }
+
                     is ResponseState.Success -> {
-                        Toast.makeText(this@LoginActivity, "Sukses Login", Toast.LENGTH_SHORT).show()
+                        isFormFieldEnabled(true)
+                        Toast.makeText(this@LoginActivity,
+                            getString(R.string.success_login), Toast.LENGTH_SHORT)
+                            .show()
                         startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                         finish()
                     }
 
                     is ResponseState.Error -> {
-                        loginButton.isEnabled = true
-                        loginButton.text = "Login"
-                        Toast.makeText(this@LoginActivity, result.errorMessage, Toast.LENGTH_SHORT).show()
+                        isFormFieldEnabled(true)
+                        btnLogin.isEnabled = true
+                        btnLogin.text = getString(R.string.login)
+                        Toast.makeText(this@LoginActivity, result.errorMessage, Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     else -> binding.root.isGone = true
                 }
+            }
+        }
+    }
+
+    private fun isFormFieldEnabled(isEnable: Boolean) {
+        binding.apply {
+            if (isEnable) {
+                btnLogin.isEnabled = true
+                btnRegister.isEnabled = true
+                edLoginEmail.isEnabled = true
+                edLoginPassword.isEnabled = true
+            } else {
+                btnLogin.isEnabled = false
+                btnRegister.isEnabled = false
+                edLoginEmail.isEnabled = false
+                edLoginPassword.isEnabled = false
+            }
+        }
+    }
+
+    private fun animationPlay(){
+        binding.apply {
+            AnimatorSet().apply {
+                playSequentially(
+                    ObjectAnimator.ofFloat(loginLogo, View.ALPHA, 1f).setDuration(500),
+                    ObjectAnimator.ofFloat(headlineLogin, View.ALPHA, 1f).setDuration(500),
+                    ObjectAnimator.ofFloat(edLoginEmail, View.ALPHA, 1f).setDuration(500),
+                    ObjectAnimator.ofFloat(edLoginPassword, View.ALPHA, 1f).setDuration(500),
+                    ObjectAnimator.ofFloat(btnLogin, View.ALPHA, 1f).setDuration(500),
+                    ObjectAnimator.ofFloat(btnRegister, View.ALPHA, 1f).setDuration(500),
+                )
+                start()
             }
         }
     }

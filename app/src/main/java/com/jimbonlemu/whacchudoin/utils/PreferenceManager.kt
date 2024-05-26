@@ -2,7 +2,7 @@ package com.jimbonlemu.whacchudoin.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.jimbonlemu.whacchudoin.data.network.auth.LoginResult
+import com.jimbonlemu.whacchudoin.data.network.dto.LoginResult
 
 class PreferenceManager(context: Context) {
     private var prefs: SharedPreferences =

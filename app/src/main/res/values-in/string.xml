@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WhacchuDoin</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Pesan</string>
+    <string name="sync_header">Sinkronisasi</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Tanda tangan anda</string>
+    <string name="reply_title">Aksi balasan bawaan</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sinkronisasi email secara berkala</string>
+    <string name="attachment_title">Unduh piranti mendatang</string>
+    <string name="attachment_summary_on">Secara otomatis mengunduh lampiran untuk email masuk</string>
+    <string name="attachment_summary_off">Hanya unduh lampiran jika diminta secara manual</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="iv_item_photo_desc">Gambar deskripsi cerita yang diposting</string>
+    <string name="tv_item_name_dec">Nama pengguna yang memposting cerita</string>
+    <string name="add_new_story">Tambahkan Cerita Baru</string>
+    <string name="logout">Keluar</string>
+    <string name="image_desc_add">Pratinjau gambar sebelum cerita diposting</string>
+    <string name="camera">Kamera</string>
+    <string name="ed_hint">Tulis deskripsi aktivitas Anda</string>
+    <string name="btn_add_text">Posting Cerita Anda</string>
+    <string name="add_story_title">Tambahkan Cerita</string>
+    <string name="gallery">Galeri</string>
+    <string name="loading_upload_story">Proses mengunggah cerita</string>
+    <string name="success_post_story">Sukses Posting cerita Anda</string>
+    <string name="access_permission">Izin untuk menggunakan Akses Lokasi Ditolak \n Harap aktifkan untuk melakukan tindakan ini</string>
+    <string name="detail_story">Detail Cerita</string>
+    <string name="loading">Memuat....</string>
+    <string name="success_login">Sukses Masuk</string>
+    <string name="login">Masuk</string>
+    <string name="confirmation">Konfirmasi!</string>
+    <string name="log_out_confirm">Apakah anda yakin untuk keluar ?</string>
+    <string name="yes_answer">ya, Saya yakin</string>
+    <string name="no_answer">Tidak sekarang</string>
+    <string name="type_email">Ketikkan email anda</string>
+    <string name="type_password">Ketikkan kata sandi anda</string>
+    <string name="type_password_confirm">Ketikkan konfirmasi kata sandi anda</string>
+    <string name="application_logo">Logo Aplikasi</string>
+    <string name="register">Registrasi</string>
+    <string name="type_name">Ketikkan nama anda</string>
+    <string name="email_empty_error">Kolom email tidak boleh dibiarkan kosong</string>
+    <string name="password_empty_error">Kolom kata sandi tidak boleh dibiarkan kosong</string>
+    <string name="name_empty_error">Kolom nama tidak boleh dibiarkan kosong</string>
+    <string name="password_confirm_empty_error">Kolom konfrimasi kata sandi tidak boleh dibiarkan kosong</string>
+    <string name="password_field_and_confirmation_error">Pastikan Anda mengetikkan kata sandi dan konfirmasi dengan nilai yang sama</string>
+    <string name="success_register">Berhasil mendaftarkan akun sekarang coba login ke akun Anda</string>
+    <string name="don_t_have_an_account">Belum punya akun \n klik saya</string>
+    <string name="already_have_an_account">Sudah memiliki akun ? \n klik saya untuk masuk</string>
+    <string name="post_story_option">Opsi Postingan Cerita</string>
+    <string name="post_with_your_current_location">Post cerita dengan menyertakan lokasi ?</string>
+    <string name="yes_post_with_current_location">"Yes,Post cerita dengan menyertakan lokasi "</string>
+    <string name="no_don_t_post_with_location">Tidak, Posting cerita tanpa menyertakan lokasi</string>
+    <string name="don_t_left_the_image_and_description_empty">Jangan biarkan gambar dan kolom deskripsi kosong</string>
+</resources>

@@ -8,11 +8,11 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.logger.Level
 
-
 class CoreApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
+            androidLogger(Level.NONE)
             androidContext(this@CoreApplication)
             modules(koinModules)
         }
