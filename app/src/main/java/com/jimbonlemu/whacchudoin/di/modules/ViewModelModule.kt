@@ -4,6 +4,7 @@ import com.jimbonlemu.whacchudoin.view_models.AddStoryViewModel
 import com.jimbonlemu.whacchudoin.view_models.AuthViewModel
 import com.jimbonlemu.whacchudoin.view_models.GetAllStoryViewModel
 import com.jimbonlemu.whacchudoin.view_models.GetDetailStoryViewModel
+import com.jimbonlemu.whacchudoin.view_models.MapsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,4 +13,5 @@ val viewModelModule = module {
     viewModel { GetAllStoryViewModel(get()) }
     viewModel { GetDetailStoryViewModel(get()) }
     viewModel { AddStoryViewModel(get()) }
+    viewModel { MapsViewModel(get()) }
 }

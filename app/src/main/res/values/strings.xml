@@ -56,4 +56,11 @@
     <string name="yes_post_with_current_location">"Yes, Post with current location "</string>
     <string name="no_don_t_post_with_location">No, Don\'t post with location</string>
     <string name="don_t_left_the_image_and_description_empty">Don\'t left the Image and description empty</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="reload_connection">Reload Connection</string>
+    <string name="empty_story_list">No stories available.</string>
+    <string name="failed_to_apply_map_style">Failed to apply Map Style</string>
+    <string name="cannot_find_map_style">Cannot find map style %1$s</string>
+    <string name="loading_map">Loading map data please wait</string>
+    <string name="view_user_poster_in_maps">View User Poster in Maps</string>
 </resources>

@@ -56,4 +56,11 @@
     <string name="yes_post_with_current_location">"Yes,Post cerita dengan menyertakan lokasi "</string>
     <string name="no_don_t_post_with_location">Tidak, Posting cerita tanpa menyertakan lokasi</string>
     <string name="don_t_left_the_image_and_description_empty">Jangan biarkan gambar dan kolom deskripsi kosong</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="reload_connection">Muat ulang koneksi</string>
+    <string name="empty_story_list">Tidak ada cerita tersedia.</string>
+    <string name="failed_to_apply_map_style">Gagal mengaplikasikan tema peta</string>
+    <string name="cannot_find_map_style">Tidak dapat menemukan tema %1$s</string>
+    <string name="loading_map">Sedang memuat data peta, mohon tunggu</string>
+    <string name="view_user_poster_in_maps">Lihat lokasi para pengunggah cerita</string>
 </resources>

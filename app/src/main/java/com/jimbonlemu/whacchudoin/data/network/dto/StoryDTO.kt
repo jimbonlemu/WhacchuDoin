@@ -1,5 +1,7 @@
 package com.jimbonlemu.whacchudoin.data.network.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.jimbonlemu.whacchudoin.data.network.response.ApiResponse
 
@@ -15,7 +17,9 @@ data class DetailStoryResponse(
     val story: Story,
 ): ApiResponse()
 
+@Entity(tableName = "tb_stories")
 data class Story(
+    @PrimaryKey
     @field:SerializedName("id")
     val id: String,
 

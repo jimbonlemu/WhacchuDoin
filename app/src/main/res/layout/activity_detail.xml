@@ -8,12 +8,6 @@
     tools:context=".views.DetailActivity">
 
     <include
-        android:id="@+id/layout_detail_loader"
-        layout="@layout/layout_shimmer_item_detail"
-        android:visibility="gone" />
-
-
-    <include
         android:id="@+id/layout_detail"
         layout="@layout/layout_item_detail_story"
         app:layout_constraintBottom_toBottomOf="parent"

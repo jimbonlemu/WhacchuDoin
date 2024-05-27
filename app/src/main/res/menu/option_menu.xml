@@ -8,6 +8,10 @@
             android:id="@+id/action_add_story"
             android:title="@string/add_new_story"
             app:showAsAction="never" />
+        <item
+            android:id="@+id/action_view_map"
+            android:title="@string/view_user_poster_in_maps"
+            app:showAsAction="never" />
 
         <item
             android:id="@+id/action_logout"

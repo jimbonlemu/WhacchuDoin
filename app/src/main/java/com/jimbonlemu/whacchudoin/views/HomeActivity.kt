@@ -4,17 +4,17 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import androidx.lifecycle.lifecycleScope
+import androidx.core.view.isVisible
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jimbonlemu.whacchudoin.R
 import com.jimbonlemu.whacchudoin.core.CoreActivity
-import com.jimbonlemu.whacchudoin.data.network.response.ResponseState
 import com.jimbonlemu.whacchudoin.databinding.ActivityHomeBinding
 import com.jimbonlemu.whacchudoin.view_models.AuthViewModel
 import com.jimbonlemu.whacchudoin.view_models.GetAllStoryViewModel
+import com.jimbonlemu.whacchudoin.views.adapters.LoaderStateAdapter
 import com.jimbonlemu.whacchudoin.views.adapters.StoryPagingAdapter
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class HomeActivity : CoreActivity<ActivityHomeBinding>() {
@@ -24,66 +24,41 @@ class HomeActivity : CoreActivity<ActivityHomeBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupPagingAdapterAndRV()
-        setupObserver()
         setupAppBar()
+        setupObserver()
+        getAllStoryViewModel.getAllStories()
         setupSwipeRefresh()
     }
 
-    private fun setupPagingAdapterAndRV() {
-        binding.apply {
-            storyPagingAdapter = StoryPagingAdapter().apply {
-                addOnPagesUpdatedListener {
-                    rvStory.scrollToPosition(0)
-                }
-            }
-            rvStory.apply {
-                val linearLayoutManager = LinearLayoutManager(this@HomeActivity)
-                this.layoutManager = linearLayoutManager
-                adapter = storyPagingAdapter
-            }
-        }
-    }
-
     private fun setupObserver() {
-        getAllStoryViewModel.stories.observe(this) { response ->
-            binding.apply {
-                when (response) {
-                    is ResponseState.Loading -> {
-                        setupLoader(true)
-                        rvStory.visibility = View.INVISIBLE
-                    }
+        storyPagingAdapter = StoryPagingAdapter()
+        val linearLayoutManager = LinearLayoutManager(this)
+        val itemDecoration = DividerItemDecoration(this, linearLayoutManager.orientation)
 
-                    is ResponseState.Success -> {
-                        setupLoader(false)
-                        lifecycleScope.launch {
-                            storyPagingAdapter.submitData(response.data)
-                        }
-                        rvStory.visibility = View.VISIBLE
-                    }
-
-                    is ResponseState.Error -> {
-                        setupLoader(false)
-                        rvStory.visibility = View.VISIBLE
-
-                    }
-                }
-            }
+        binding.rvStory.apply {
+            adapter = storyPagingAdapter.withLoadStateFooter(
+                footer = LoaderStateAdapter { storyPagingAdapter.retry() }
+            )
+            layoutManager = linearLayoutManager
+            addItemDecoration(itemDecoration)
         }
-        getAllStoryViewModel.getAllStories()
+
+        getAllStoryViewModel.storyResult.observe(this) { result ->
+            storyPagingAdapter.submitData(this@HomeActivity.lifecycle, result)
+        }
+
+        storyPagingAdapter.addLoadStateListener { loadState ->
+            val isListEmpty = loadState.refresh is LoadState.NotLoading && storyPagingAdapter.itemCount == 0
+            binding.rvStory.isVisible = !isListEmpty
+            binding.emptyView.isVisible = isListEmpty
+            binding.itemStoryLoader.root.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.swipeRefreshLayout.isRefreshing = loadState.mediator?.refresh is LoadState.Loading
+        }
     }
 
-    private fun setupLoader(isLoaderEnabled: Boolean) {
-        binding.apply {
-            if (isLoaderEnabled) {
-                itemStoryLoader.root.visibility = View.VISIBLE
-                itemStoryLoader.root.startShimmer()
-                swipeRefreshLayout.isRefreshing = true
-            } else {
-                itemStoryLoader.root.stopShimmer()
-                itemStoryLoader.root.visibility = View.GONE
-                swipeRefreshLayout.isRefreshing = false
-            }
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            storyPagingAdapter.refresh()
         }
     }
 
@@ -95,6 +70,11 @@ class HomeActivity : CoreActivity<ActivityHomeBinding>() {
                     true
                 }
 
+                R.id.action_view_map -> {
+                    startActivity(Intent(this@HomeActivity, MapsActivity::class.java))
+                    true
+                }
+
                 R.id.action_logout -> {
                     AlertDialog.Builder(this).apply {
                         setTitle(getString(R.string.confirmation))
@@ -102,8 +82,7 @@ class HomeActivity : CoreActivity<ActivityHomeBinding>() {
                         setPositiveButton(getString(R.string.yes_answer)) { _, _ ->
                             authViewModel.logout()
                             val intent = Intent(context, LoginActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
                             finish()
                         }
@@ -118,13 +97,6 @@ class HomeActivity : CoreActivity<ActivityHomeBinding>() {
 
                 else -> false
             }
-        }
-    }
-
-    private fun setupSwipeRefresh() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            getAllStoryViewModel.getAllStories()
-            storyPagingAdapter.refresh()
         }
     }
 

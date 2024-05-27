@@ -19,6 +19,10 @@ interface StoryService {
         @Query("page") page: Int? = 1,
         @Query("size") size: Int? = 5,
     ): StoryResponse
+    @GET("stories")
+    suspend fun getAllStoriesWithLocation(
+        @Query("location") location: Int = 1
+    ): StoryResponse
 
     @Multipart
     @POST("stories")
@@ -33,4 +37,5 @@ interface StoryService {
     suspend fun getDetailStory(
         @Path("id") id: String
     ): DetailStoryResponse
+
 }

@@ -1,33 +1,24 @@
-    package com.jimbonlemu.whacchudoin.view_models
+package com.jimbonlemu.whacchudoin.view_models
 
-    import androidx.lifecycle.LiveData
-    import androidx.lifecycle.MutableLiveData
-    import androidx.lifecycle.ViewModel
-    import androidx.lifecycle.viewModelScope
-    import androidx.paging.PagingData
-    import androidx.paging.cachedIn
-    import com.jimbonlemu.whacchudoin.data.network.dto.Story
-    import com.jimbonlemu.whacchudoin.data.network.repository.StoryRepository
-    import com.jimbonlemu.whacchudoin.data.network.response.ResponseState
-    import kotlinx.coroutines.launch
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.jimbonlemu.whacchudoin.data.network.dto.Story
+import com.jimbonlemu.whacchudoin.data.network.repository.StoryRepository
+import kotlinx.coroutines.launch
 
-    class GetAllStoryViewModel(private val storyRepository: StoryRepository) : ViewModel() {
+class GetAllStoryViewModel(private val storyRepository: StoryRepository) : ViewModel() {
+    private var _storyResult = MutableLiveData<PagingData<Story>>()
+    val storyResult: LiveData<PagingData<Story>> = _storyResult
 
-        private val _stories = MutableLiveData<ResponseState<PagingData<Story>>>()
-        val stories: LiveData<ResponseState<PagingData<Story>>> get() = _stories
-
-        fun getAllStories() {
-            viewModelScope.launch {
-                _stories.value = ResponseState.Loading
-                try {
-                    storyRepository.getAllStories()
-                        .cachedIn(viewModelScope)
-                        .collect { data ->
-                            _stories.value = ResponseState.Success(data)
-                        }
-                } catch (e: Exception) {
-                    _stories.value = ResponseState.Error(e.message ?: "Unknown Error")
-                }
+    fun getAllStories(size: Int = 5) {
+        viewModelScope.launch {
+            storyRepository.getAllStories(size).cachedIn(viewModelScope).collect {
+                _storyResult.value = it
             }
         }
     }
+}

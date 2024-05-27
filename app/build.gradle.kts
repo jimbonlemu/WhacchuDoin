@@ -45,7 +45,7 @@ android {
 
 dependencies {
 
-//    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.swiperefreshlayout)
 
     implementation(libs.androidx.swiperefreshlayout)
     // Coroutines
@@ -95,6 +95,7 @@ dependencies {
 
     // Room Database
     implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.paging)
 
     // Paging
@@ -109,6 +110,9 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation("androidx.test:core-ktx:1.4.0")
+
 }

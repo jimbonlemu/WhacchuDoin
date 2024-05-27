@@ -28,7 +28,6 @@ class LoginActivity : CoreActivity<ActivityLoginBinding>() {
     override fun setupBinding(layoutInflater: LayoutInflater): ActivityLoginBinding =
         ActivityLoginBinding.inflate(layoutInflater)
 
-
     private fun initAction() {
         binding.apply {
             btnLogin.setOnClickListener {
@@ -56,14 +55,15 @@ class LoginActivity : CoreActivity<ActivityLoginBinding>() {
             authViewModel.loginResult.observe(this@LoginActivity) { result ->
                 when (result) {
                     is ResponseState.Loading -> {
-                        btnLogin.text = getString(R.string.loading)
                         isFormFieldEnabled(false)
                     }
 
                     is ResponseState.Success -> {
                         isFormFieldEnabled(true)
-                        Toast.makeText(this@LoginActivity,
-                            getString(R.string.success_login), Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            this@LoginActivity,
+                            getString(R.string.success_login), Toast.LENGTH_SHORT
+                        )
                             .show()
                         startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                         finish()
@@ -71,8 +71,6 @@ class LoginActivity : CoreActivity<ActivityLoginBinding>() {
 
                     is ResponseState.Error -> {
                         isFormFieldEnabled(true)
-                        btnLogin.isEnabled = true
-                        btnLogin.text = getString(R.string.login)
                         Toast.makeText(this@LoginActivity, result.errorMessage, Toast.LENGTH_SHORT)
                             .show()
                     }
@@ -86,11 +84,13 @@ class LoginActivity : CoreActivity<ActivityLoginBinding>() {
     private fun isFormFieldEnabled(isEnable: Boolean) {
         binding.apply {
             if (isEnable) {
+                btnLogin.text = getString(R.string.login)
                 btnLogin.isEnabled = true
                 btnRegister.isEnabled = true
                 edLoginEmail.isEnabled = true
                 edLoginPassword.isEnabled = true
             } else {
+                btnLogin.text = getString(R.string.loading)
                 btnLogin.isEnabled = false
                 btnRegister.isEnabled = false
                 edLoginEmail.isEnabled = false
@@ -99,7 +99,7 @@ class LoginActivity : CoreActivity<ActivityLoginBinding>() {
         }
     }
 
-    private fun animationPlay(){
+    private fun animationPlay() {
         binding.apply {
             AnimatorSet().apply {
                 playSequentially(

@@ -10,7 +10,6 @@ import java.io.IOException
 class StoryPagingSource(
     private val storyService: StoryService,
 ) : PagingSource<Int, Story>() {
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Story> {
         val position = params.key ?: 1
         return try {
